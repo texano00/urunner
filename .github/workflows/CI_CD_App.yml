@@ -1,0 +1,73 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: "[CI/CD] App"
+
+on:
+  push:
+    branches: ['main']
+    paths:
+    - 'app/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: texano00/urunner
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    defaults:
+      run:
+        working-directory: app
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint
+        run: |
+          pylint $(git ls-files '*.py') --fail-under=10
+
+      - name: Get version
+        id: metadata
+        run: |
+            version=$(cat .version)
+            echo "version=${version}" >> $GITHUB_OUTPUT
+              
+      - name: docker build and push
+        id: build_and_push
+        run: |
+          built_image="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}"
+
+          docker login ${{ env.REGISTRY }} -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_PASSWORD }}
+          if docker manifest inspect ${built_image} > /dev/null; then
+            echo "already exist -> do not push"
+            exit 1
+          else
+            echo "does not exist -> push"
+            docker build . -t ${built_image}
+            docker push ${built_image}  
+          fi
+
+          

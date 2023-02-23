@@ -1,0 +1,68 @@
+# Don't change it
+replicaCount: 1
+
+image:
+  repository: ghcr.io/texano00/urunner
+  pullPolicy: IfNotPresent
+  tag: 0.1.2
+
+config:
+  URUNNER_CONF_DOCKER_API_VERIFY: true
+  URUNNER_CONF_LOG_LEVEL: INFO
+  URUNNER_CONF_KUBE_AUTH: incluster
+  URUNNER_CONF_SQLLIGHT_PATH: /app/urunner.db
+  URUNNER_CONF_FREQUENCY_CHECK_SECONDS: 30
+  # <namespace>:<regexTag>
+  URUNNER_CONF_NAMESPACES_TO_WATCH: default:?latest
+  URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH: registry.mycompanyhost.net:8080
+  URUNNER_CONF_CONTAINER_REGISTRY_TYPE: harbor
+
+harbor:
+  createSecret: true
+  username: user
+  password: pass
+  secretName: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

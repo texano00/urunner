@@ -1,0 +1,49 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: "[CI/CD] Helm"
+
+on:
+  push:
+    branches: ['main']
+    paths:
+    - 'helm/**'
+env:
+  REGISTRY: ghcr.io
+  OCI_CHART_NAME: texano00/urunner/helm
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    defaults:
+      run:
+        working-directory: helm/urunner
+    environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Helm lint
+        run: |
+          helm lint
+
+      - name: Helm lint
+        run: |
+          helm lint
+
+      - name: Helm pack and push
+        run: |
+          helm package .
+          helm registry login ${{ env.REGISTRY }} -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_PASSWORD }}
+          helm push *.tgz oci://${{ env.REGISTRY }}/${{ env.OCI_CHART_NAME }}
+          
