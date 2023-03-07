@@ -11,6 +11,7 @@ Urunner auto detects the container image tag digest (for example the digest of t
 ## Docker API V2
 
 Urunner integrates external container registry (ex. [Harbor](https://goharbor.io/)) using standard [Docker API V2](https://docs.docker.com/registry/spec/api/).\
+Actually **Harbor** is the only container registry officially supported.\
 **AWS ECR and Azure ACR** support will be released soon.
 
 ## Configurable watcher
