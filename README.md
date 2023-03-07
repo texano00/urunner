@@ -1,13 +1,25 @@
 # urunner
 
+## Intro
+
 <img width=200 src=asset/logo.png>
 
 URunner is a Kubernetes utiity in order to **auto restart** pods on image **tag digest change**.\
-This is very useful on environments where it is commonly used the `latest` tag which frequently changes over time.\
+This is very useful on environments where it is commonly used the `latest` tag which frequently changes over time.
+
+## Docker API V2
+
 Urunner auto detects the container image tag digest (for example the digest of tag `latest`) and automatically restart pods.\
-Urunner integrates external container registry (ex. [Harbor](https://goharbor.io/)) using standard [Docker API V2](https://docs.docker.com/registry/spec/api/).
+Urunner integrates external container registry (ex. [Harbor](https://goharbor.io/)) using standard [Docker API V2](https://docs.docker.com/registry/spec/api/).\
+**AWS ECR and Azure ACR** support will be released soon.
+
+## Configurable watcher
 
 Urunner is also **fully configurable** in order to **watch only specific namespaces** and **specific tags** (ex. latest, dev) based on **regex**.
+
+## Status
+
+Actually Urunner is released with a `0.x.x` version, a stable version will be released as soon as possible thanks also to the **open source community**.
 
 ## Helm
 
@@ -19,7 +31,7 @@ Urunner is also **fully configurable** in order to **watch only specific namespa
 helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --version 0.1.0 --values my-values.yaml -n urunner --create-namespace
 ```
 
-## Env vars
+## Urunner env vars
 
 | Var                                      | Description                                               | Example                              |
 | ---------------------------------------- | --------------------------------------------------------- | ------------------------------------ |
@@ -37,3 +49,8 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 ## Flow
 
 <img src=asset/urunner.png>
+
+## ToDo
+
+- Test AWS ECR integration
+- Test Azure ACR integration
