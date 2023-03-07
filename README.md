@@ -5,11 +5,11 @@
 <img width=200 src=asset/logo.png>
 
 URunner is a Kubernetes utiity in order to **auto restart** pods on image **tag digest change**.\
-This is very useful on environments where it is commonly used the `latest` tag which frequently changes over time.
+This is very useful on environments where it is commonly used the `latest` tag which frequently changes over time.\
+Urunner auto detects the container image tag digest (for example the digest of tag `latest`) and automatically restart pods.
 
 ## Docker API V2
 
-Urunner auto detects the container image tag digest (for example the digest of tag `latest`) and automatically restart pods.\
 Urunner integrates external container registry (ex. [Harbor](https://goharbor.io/)) using standard [Docker API V2](https://docs.docker.com/registry/spec/api/).\
 **AWS ECR and Azure ACR** support will be released soon.
 
