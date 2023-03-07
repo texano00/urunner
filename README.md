@@ -54,3 +54,7 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 
 - Test AWS ECR integration
 - Test Azure ACR integration
+
+## Notes
+
+Logo was generated using Fotor AI tool https://www.fotor.com/features/ai-image-generator/
