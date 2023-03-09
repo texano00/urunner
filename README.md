@@ -34,18 +34,20 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 
 ## Urunner env vars
 
-| Var                                      | Description                                               | Example                              |
-| ---------------------------------------- | --------------------------------------------------------- | ------------------------------------ |
-| URUNNER_CONF_DOCKER_API_VERIFY           | SSL verify to docker registry                             | True or False                        |
-| URUNNER_CONF_LOG_LEVEL                   | Log Level                                                 | DEBUG,INFO,WARNING                   |
-| URUNNER_CONF_KUBE_AUTH                   | Kubernetes client authentication strategy                 | incluster or kubeconfig              |
-| URUNNER_CONF_SQLLIGHT_PATH               | Path of sqlight DB                                        | ./urunner.db                         |
-| URUNNER_CONF_FREQUENCY_CHECK_SECONDS     | Frequency of urunner cron job (seconds)                   | 30                                   |
-| URUNNER_CONF_NAMESPACES_TO_WATCH         | Which images/tags foreach namespaces urunner has to watch | default:.?latest,namespace2:latest-. |
-| URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH | Which is the container registry to watch                  | registry.mycompanyhost.net:8080      |
-| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                | harbor or dockerhub                  |
-| URUNNER_SECR_HARBOR_USER                 | Harbor username                                           | user                                 |
-| URUNNER_SECR_HARBOR_PASS                 | Harbor password                                           | pass                                 |
+| Var                                      | Description                                               | Example                                |
+| ---------------------------------------- | --------------------------------------------------------- | -------------------------------------- |
+| URUNNER_CONF_DOCKER_API_VERIFY           | SSL verify to docker registry                             | True or False                          |
+| URUNNER_CONF_LOG_LEVEL                   | Log Level                                                 | DEBUG,INFO,WARNING                     |
+| URUNNER_CONF_KUBE_AUTH                   | Kubernetes client authentication strategy                 | incluster or kubeconfig                |
+| URUNNER_CONF_SQLLIGHT_PATH               | Path of sqlight DB                                        | ./urunner.db                           |
+| URUNNER_CONF_FREQUENCY_CHECK_SECONDS     | Frequency of urunner cron job (seconds)                   | 30                                     |
+| URUNNER_CONF_NAMESPACES_TO_WATCH         | Which images/tags foreach namespaces urunner has to watch | default:.?latest,namespace2:latest-.   |
+| URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH | Which is the container registry to watch                  | registry.mycompanyhost.net:8080        |
+| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                | harbor,aws_ecr,dockerhub               |
+| URUNNER_SECR_HARBOR_USER                 | Harbor username                                           | user                                   |
+| URUNNER_SECR_HARBOR_PASS                 | Harbor password                                           | pass                                   |
+| URUNNER_SECR_AWS_ACCESS_KEY_ID           | AWS credential in order to pull from AWS private ECR      | AKIAIOSFODNN7EXAMPLE                   |
+| URUNNER_SECR_AWS_SECRET_ACCESS_KEY       | AWS credential in order to pull from AWS private ECR      | wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY |
 
 ## Flow
 

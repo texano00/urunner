@@ -15,13 +15,17 @@ config:
   # <namespace>:<regexTag>
   URUNNER_CONF_NAMESPACES_TO_WATCH: default:?latest
   URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH: registry.mycompanyhost.net:8080
+  # harbor,aws_ecr,dockerhub
   URUNNER_CONF_CONTAINER_REGISTRY_TYPE: harbor
-
-harbor:
-  createSecret: true
-  username: user
-  password: pass
+secret:
+  create: true
   secretName: ""
+  harbor:
+    username: user
+    password: pass
+  aws:
+    access_key_id: AKIAIOSFODNN7EXAMPLE
+    secret_access_key: wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY
 
 imagePullSecrets: []
 nameOverride: ""
