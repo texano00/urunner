@@ -51,11 +51,19 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 
 ## Flow
 
+### Generic
+
 <img src=asset/urunner.png>
+
+### AWS
+
+<img src=asset/urunner-aws.png>
 
 ## ToDo
 
 - Test Azure ACR integration
+- add sqlite persistence in Helm chartgs
+
 
 ## Notes
 
