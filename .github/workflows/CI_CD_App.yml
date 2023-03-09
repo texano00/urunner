@@ -21,6 +21,7 @@ env:
 
 jobs:
   build-and-push-image:
+    if: ${{ !contains(github.event.head_commit.message, '#skip-actions') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read

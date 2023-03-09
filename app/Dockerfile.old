@@ -1,7 +1,0 @@
-FROM python:3.10
-ENV BASE_DIR=/app
-WORKDIR ${BASE_DIR}
-ADD . $BASE_DIR
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-CMD python -u app.py
