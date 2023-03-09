@@ -1,11 +1,11 @@
 """dockerapi module"""
 import logging
+import hashlib
 import requests
+import boto3
 import utils.general as general
 import utils.config as config
 from utils.model.image import Image
-import boto3
-import hashlib
 
 
 def get_dockerapi_image_path(image_name):
