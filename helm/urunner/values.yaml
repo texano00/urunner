@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/texano00/urunner
   pullPolicy: IfNotPresent
-  tag: 0.1.2
+  tag: 0.1.3
 
 config:
   URUNNER_CONF_DOCKER_API_VERIFY: true
