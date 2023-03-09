@@ -4,6 +4,8 @@ import requests
 import utils.general as general
 import utils.config as config
 from utils.model.image import Image
+import boto3
+import hashlib
 
 
 def get_dockerapi_image_path(image_name):
@@ -21,6 +23,29 @@ def get_harbor_auth(image: Image):
     password = config.get_urunner_secr_harbor_pass()
     auth = f"{username}:{password}".encode("ascii")
     return f"Basic {auth}"
+
+
+def get_aws_auth(image: Image):
+    """get_aws_auth"""
+    logging.debug(image)
+    # ex. 435734619587.dkr.ecr.us-east-2.amazonaws.com
+    region_name = config.get_urunner_conf_container_registry_to_watch().split(".")[3]
+    registry_id = config.get_urunner_conf_container_registry_to_watch().split(".")[0]
+    boto3.Session(
+        aws_access_key_id=config.get_urunner_secr_aws_access_key_id,
+        aws_secret_access_key=config.get_urunner_secr_aws_secret_access_key,
+        region_name=region_name,
+    )
+
+    client = boto3.client("ecr", region_name="us-east-2")
+
+    response = client.get_authorization_token(
+        registryIds=[
+            registry_id,
+        ]
+    )
+    token = response["authorizationData"][0]["authorizationToken"]
+    return f"Basic {token}"
 
 
 def get_dockerhub_auth(image: Image):
@@ -41,8 +66,8 @@ def get_dockerhub_host():
     return "https://registry-1.docker.io"
 
 
-def get_harbor_host():
-    """get_harbor_host"""
+def get_configured_host():
+    """get_configured_host"""
     registry_host = config.get_urunner_conf_container_registry_to_watch()
     return f"https://{registry_host}"
 
@@ -67,7 +92,13 @@ def get_dockerapi_digest(image: Image, authorization, host):
 
     logging.debug(response)
     if response.status_code == 200:
-        image_digest = response.headers["docker-content-digest"]
+        logging.debug(response.headers)
+        image_digest = (
+            response.headers["docker-content-digest"]
+            if "docker-content-digest" in response.headers
+            else hashlib.sha1(f"{response.content}".encode("utf-8")).hexdigest()
+        )
+        logging.debug("image_digest: %s", image_digest)
         return image_digest
 
     logging.error("Error status code: %i", response.status_code)

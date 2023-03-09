@@ -51,3 +51,13 @@ def get_urunner_secr_harbor_user():
 def get_urunner_secr_harbor_pass():
     """get_urunner_secr_harbor_pass"""
     return os.environ.get("URUNNER_SECR_HARBOR_PASS", "Harbor12345")
+
+
+def get_urunner_secr_aws_access_key_id():
+    """def get_urunner_secr_aws_access_key_id"""
+    return os.environ.get("URUNNER_SECR_AWS_ACCESS_KEY_ID", "AKIAIOSFODNN7EXAMPLE")
+
+
+def get_urunner_secr_aws_secret_access_key():
+    """def get_urunner_secr_aws_secret_access_key"""
+    return os.environ.get("URUNNER_SECR_AWS_SECRET_ACCESS_KEY", "wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY")
