@@ -85,33 +85,3 @@ def process_resource(db_ref: persistence.Persistence, kubernetes: Kubernetes, im
             kubernetes.restart_deployment(image.namespace, image.resource)
 
         db_ref.update_image_last_check_data(image_id=image.image_id)
-
-
-def is_namespace_to_watch(namespace, ns_config):
-    """is_namespace_to_watch"""
-    splitted_conf = ns_config.split(":")
-    for i in range(0, len(splitted_conf) - 1, 2):
-        # j = i+1
-        namespace_regex = splitted_conf[i]
-        # tagRegex = splitted_conf[j]
-        logging.debug("namespace_regex: %s", namespace_regex)
-        logging.debug("namespace: %s", namespace)
-        if re.search(namespace_regex, namespace):
-            logging.debug("Match")
-            return True
-
-    logging.debug("ns %s NO Match", namespace)
-    return False
-
-
-def is_tag_to_watch(namespace, tag, ns_config):
-    """is_tag_to_watch"""
-    splitted_conf = ns_config.split(":")
-    for i in range(0, len(splitted_conf) - 1, 2):
-        j = i + 1
-        namespace_regex = splitted_conf[i]
-        tag_regex = splitted_conf[j]
-        if re.search(namespace_regex, namespace) and re.search(tag_regex, tag):
-            return True
-
-    return False

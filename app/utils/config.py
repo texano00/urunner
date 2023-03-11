@@ -28,11 +28,6 @@ def get_urunner_conf_frequency_check_seconds():
     return int(os.environ.get("URUNNER_CONF_FREQUENCY_CHECK_SECONDS", "30"))
 
 
-def get_urunner_conf_namespaces_to_watch():
-    """get_urunner_conf_namespaces_to_watch"""
-    return os.environ.get("URUNNER_CONF_NAMESPACES_TO_WATCH", "test-urunner-harbor:.?latest")
-
-
 def get_urunner_conf_container_registry_to_watch():
     """get_urunner_conf_container_registry_to_watch"""
     return os.environ.get("URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH", "harbor.default.svc.cluster.local:8080")

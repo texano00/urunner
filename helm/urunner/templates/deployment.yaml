@@ -5,7 +5,6 @@ metadata:
   labels:
     {{- include "urunner.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "urunner.selectorLabels" . | nindent 6 }}

@@ -1,21 +1,22 @@
-# Don't change it
-replicaCount: 1
-
 image:
   repository: ghcr.io/texano00/urunner
   pullPolicy: IfNotPresent
-  tag: 0.1.3
+  tag: 0.1.5
 
 config:
+  # se to false in order to disallow ssl verify to container registry
   URUNNER_CONF_DOCKER_API_VERIFY: true
+  # Text logging level for the message ('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL').
   URUNNER_CONF_LOG_LEVEL: INFO
+  # incluster, kubeconfig allowed
   URUNNER_CONF_KUBE_AUTH: incluster
+  # path on which urunner store its sqllight database
   URUNNER_CONF_SQLLIGHT_PATH: /app/urunner.db
+  # urunner check frequency
   URUNNER_CONF_FREQUENCY_CHECK_SECONDS: 20
-  # <namespace>:<regexTag>
-  URUNNER_CONF_NAMESPACES_TO_WATCH: test-urunner-aws:latest
+  # container registry url
   URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH: 435734619587.dkr.ecr.us-east-2.amazonaws.com
-  # harbor,aws_ecr,dockerhub
+  # harbor, aws_ecr, dockerhub
   URUNNER_CONF_CONTAINER_REGISTRY_TYPE: aws_ecr
 secret:
   create: true

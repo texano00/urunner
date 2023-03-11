@@ -15,8 +15,6 @@ def job():
     all_namespaces = kubernetes.get_namespaces()
     for namespace in all_namespaces.items:
         namespace = namespace.metadata.name
-        if not general.is_namespace_to_watch(namespace=namespace, ns_config=namespacesToWatch):
-            continue
 
         logging.debug("Listing deployments in namespace %s", namespace)
         deployments = kubernetes.get_deployments(namespace=namespace)
@@ -34,9 +32,6 @@ def job():
 
                 image_tag = general.explode_image(image)[1]
                 image.tag = image_tag
-                if not general.is_tag_to_watch(namespace=namespace, tag=image_tag, ns_config=namespacesToWatch):
-                    continue
-
                 image_id = f"{namespace}-{deployment.metadata.name}-{container.image}-{image_tag}"
                 image.image_id = image_id
                 logging.debug("Image: %s", image)
@@ -45,8 +40,6 @@ def job():
 
 
 logging.basicConfig(encoding="utf-8", level=config.get_urunner_conf_log_level())
-
-namespacesToWatch = config.get_urunner_conf_namespaces_to_watch()
 
 db_ref = persistence.Persistence(path=config.get_urunner_conf_sqlight_path())
 db_ref.init()

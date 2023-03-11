@@ -17,12 +17,12 @@ class Kubernetes:
 
     def get_namespaces(self):
         """get_namespaces"""
-        namespace = self.v1_core.list_namespace()
+        namespace = self.v1_core.list_namespace(label_selector="urunner=enable")
         return namespace
 
     def get_deployments(self, namespace):
         """get_deployments"""
-        deployments = self.v1_apps.list_namespaced_deployment(namespace=namespace)
+        deployments = self.v1_apps.list_namespaced_deployment(namespace=namespace, label_selector="urunner!=disable")
         return deployments
 
     def restart_deployment(self, namespace, deployment):
