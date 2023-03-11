@@ -5,7 +5,7 @@ from ast import literal_eval
 
 def get_urunner_conf_docker_api_verify():
     """get_urunner_conf_docker_api_verify"""
-    return literal_eval(os.environ.get("URUNNER_CONF_DOCKER_API_VERIFY", "False"))
+    return literal_eval(os.environ.get("URUNNER_CONF_DOCKER_API_VERIFY", "True").capitalize())
 
 
 def get_urunner_conf_log_level():
