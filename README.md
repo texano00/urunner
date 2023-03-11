@@ -21,19 +21,6 @@ Add label `urunner=enable` to all namespaces in order to be watched by Urunner.\
 `kubectl label ns mynamespace urunner=enable`
 
 ```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    # add this label
-    urunner: disable
-...
-```
-
-Also, you can add exceptions inside `mynamespace`, for example\
-`kubectl label deployment mydeployment urunner=disable -n mynamespace`
-
-```
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -43,11 +30,20 @@ metadata:
   name: mynamespace
 ```
 
-Doing so, all deployments except "mydeployment" will be watched by Urunner.
+Also, you can add exceptions inside `mynamespace`, for example\
+`kubectl label deployment mydeployment urunner=disable -n mynamespace`
 
-## Status
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    # add this label
+    urunner: disable
+...
+```
 
-Actually Urunner is released with a `0.x.x` version, a stable version will be released as soon as possible thanks also to the **open source community**.
+Doing so, all deployments except `mydeployment` will be watched by Urunner.
 
 ## Helm
 
