@@ -1,6 +1,5 @@
 """"General module"""
 import datetime
-import re
 import logging
 from utils.dockerapi import (
     get_dockerapi_digest,
