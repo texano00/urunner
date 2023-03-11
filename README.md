@@ -12,7 +12,7 @@ Urunner auto detects the container image tag digest (for example the digest of t
 
 Urunner integrates external container registry (ex. [Harbor](https://goharbor.io/)) using standard [Docker API V2](https://docs.docker.com/registry/spec/api/).\
 Actually **Harbor** and **AWS ECR** are the container registries officially supported.\
-**Azure ACR** support will be released soon.
+**Azure ACR** and **Dockerhub** support will be released soon.
 
 ## Configurable watcher
 
@@ -65,7 +65,7 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 | URUNNER_CONF_SQLLIGHT_PATH               | Path of sqlight DB                                                                               | ./urunner.db                           |
 | URUNNER_CONF_FREQUENCY_CHECK_SECONDS     | Frequency of urunner cron job (seconds)                                                          | 30                                     |
 | URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH | Which is the container registry to watch                                                         | registry.mycompanyhost.net:8080        |
-| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                                                       | harbor,aws_ecr,dockerhub               |
+| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                                                       | harbor,aws_ecr                         |
 | URUNNER_SECR_HARBOR_USER                 | Harbor username, configure only if registry type is harbor                                       | user                                   |
 | URUNNER_SECR_HARBOR_PASS                 | Harbor password, configure only if registry type is harbor                                       | pass                                   |
 | URUNNER_SECR_AWS_ACCESS_KEY_ID           | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | AKIAIOSFODNN7EXAMPLE                   |

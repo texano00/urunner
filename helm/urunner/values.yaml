@@ -16,7 +16,7 @@ config:
   URUNNER_CONF_FREQUENCY_CHECK_SECONDS: 20
   # container registry url
   URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH: 435734619587.dkr.ecr.us-east-2.amazonaws.com
-  # harbor, aws_ecr, dockerhub
+  # harbor, aws_ecr
   URUNNER_CONF_CONTAINER_REGISTRY_TYPE: aws_ecr
 secret:
   create: true
