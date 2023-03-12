@@ -55,6 +55,10 @@ Doing so, all deployments except `mydeployment` will be watched by Urunner.
 helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --version 0.1.0 --values my-values.yaml -n urunner --create-namespace
 ```
 
+Use cases:
+
+- [AWS use case](https://www.yuribacciarini.com/automatically-pull-images-on-aws-ecr-latest-tag-change-from-aws-eks/)
+
 ## Urunner env vars
 
 | Var                                      | Description                                                                                      | Example                                |
