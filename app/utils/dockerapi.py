@@ -1,4 +1,5 @@
 """dockerapi module"""
+from base64 import b64encode
 import logging
 import hashlib
 import requests
@@ -50,13 +51,35 @@ def get_aws_auth(image: Image):
 
 def get_dockerhub_auth(image: Image):
     """get_dockerhub_auth"""
+    auth_service = "registry.docker.io"
+    auth_url = "https://auth.docker.io/token"
+    return get_docker_v2_api_auth_style(image=image, auth_url=auth_url, auth_service=auth_service)
+
+
+def get_digitalocean_auth(image: Image):
+    """get_digitalocean_auth"""
+    auth_service = "registry.digitalocean.com"
+    auth_url = "https://api.digitalocean.com/v2/registry/auth"
+    do_token = config.get_urunner_secr_digital_ocean_token()
+    do_token = b64encode(f"{do_token}:{do_token}".encode("ascii")).decode("ascii")
+    auth_header = f"Basic {do_token}"
+    return get_docker_v2_api_auth_style(
+        image=image, auth_url=auth_url, auth_service=auth_service, auth_header=auth_header
+    )
+
+
+def get_docker_v2_api_auth_style(image: Image, auth_service, auth_url, auth_header=None):
+    """get_docker_v2_api_auth_style"""
     exploded_image = general.explode_image(image)
     image_name = exploded_image[0]
     dockerhub_image_path = get_dockerapi_image_path(image_name)
-    auth_service = "registry.docker.io"
     auth_scope = f"repository:{dockerhub_image_path}:pull"
-    url = f"https://auth.docker.io/token?service={auth_service}&scope={auth_scope}"
-    response = requests.get(url, timeout=60)
+    headers = {"Authorization": auth_header} if auth_header else {}
+    print(headers)
+    url = f"{auth_url}?service={auth_service}&scope={auth_scope}"
+    print(url)
+    response = requests.get(url, headers=headers, timeout=60)
+    print(response)
     token = response.json()["token"]
     return f"Bearer {token}"
 
@@ -64,6 +87,11 @@ def get_dockerhub_auth(image: Image):
 def get_dockerhub_host():
     """get_dockerhub_host"""
     return "https://registry-1.docker.io"
+
+
+def get_digitalocean_host():
+    """get_digitalocean_host"""
+    return "https://registry.digitalocean.com"
 
 
 def get_configured_host():

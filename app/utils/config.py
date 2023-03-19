@@ -56,3 +56,8 @@ def get_urunner_secr_aws_access_key_id():
 def get_urunner_secr_aws_secret_access_key():
     """def get_urunner_secr_aws_secret_access_key"""
     return os.environ.get("URUNNER_SECR_AWS_SECRET_ACCESS_KEY", "wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY")
+
+
+def get_urunner_secr_digital_ocean_token():
+    """def get_urunner_secr_digital_ocean_token"""
+    return os.environ.get("URUNNER_SECR_DIGITAL_OCEAN_TOKEN", "xxxxx")

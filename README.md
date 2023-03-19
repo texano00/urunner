@@ -11,8 +11,13 @@ Urunner auto detects the container image tag digest (for example the digest of t
 ## Docker API V2
 
 Urunner integrates external container registry (ex. [Harbor](https://goharbor.io/)) using standard [Docker API V2](https://docs.docker.com/registry/spec/api/).\
-Actually **Harbor** and **AWS ECR** are the container registries officially supported.\
+Actually **Harbor**, **AWS ECR** and **Digital Ocean** are the container registries officially supported.\
 **Azure ACR** and **Dockerhub** support will be released soon.
+
+Use cases:
+
+- [AWS use case](https://www.yuribacciarini.com/automatically-pull-images-on-aws-ecr-latest-tag-change-from-aws-eks/)
+- [DigitalOcean container registry DOCR use case](https://www.yuribacciarini.com/automatically-pull-new-digitalocean-container-registry-docr-latest-tags-from-kubernetes/)
 
 ## Configurable watcher
 
@@ -55,10 +60,6 @@ Doing so, all deployments except `mydeployment` will be watched by Urunner.
 helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --version 0.1.0 --values my-values.yaml -n urunner --create-namespace
 ```
 
-Use cases:
-
-- [AWS use case](https://www.yuribacciarini.com/automatically-pull-images-on-aws-ecr-latest-tag-change-from-aws-eks/)
-
 ## Urunner env vars
 
 | Var                                      | Description                                                                                      | Example                                |
@@ -69,11 +70,12 @@ Use cases:
 | URUNNER_CONF_SQLLIGHT_PATH               | Path of sqlight DB                                                                               | ./urunner.db                           |
 | URUNNER_CONF_FREQUENCY_CHECK_SECONDS     | Frequency of urunner cron job (seconds)                                                          | 30                                     |
 | URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH | Which is the container registry to watch                                                         | registry.mycompanyhost.net:8080        |
-| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                                                       | harbor,aws_ecr                         |
+| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                                                       | harbor,aws_ecr, digitalocean           |
 | URUNNER_SECR_HARBOR_USER                 | Harbor username, configure only if registry type is harbor                                       | user                                   |
 | URUNNER_SECR_HARBOR_PASS                 | Harbor password, configure only if registry type is harbor                                       | pass                                   |
 | URUNNER_SECR_AWS_ACCESS_KEY_ID           | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | AKIAIOSFODNN7EXAMPLE                   |
 | URUNNER_SECR_AWS_SECRET_ACCESS_KEY       | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY |
+| URUNNER_SECR_DIGITAL_OCEAN_TOKEN         | Digital Ocean token                                                                              | xxxxx                                  |
 
 ## Flow
 

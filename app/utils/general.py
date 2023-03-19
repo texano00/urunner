@@ -6,8 +6,10 @@ from utils.dockerapi import (
     get_dockerhub_auth,
     get_harbor_auth,
     get_aws_auth,
+    get_digitalocean_auth,
     get_dockerhub_host,
     get_configured_host,
+    get_digitalocean_host,
 )
 from utils.model.image import Image
 from utils.kubernetes import Kubernetes
@@ -39,6 +41,8 @@ def explode_image(image: Image):
     # 435734619587.dkr.ecr.us-east-2.amazonaws.com/urunner-test/nginx:latest
     image_name = image.image
     image_name = image_name.replace(config.get_urunner_conf_container_registry_to_watch(), "")
+    if image_name[0] == "/":
+        image_name = image_name[1:]
 
     # found_http_port = re.search(".:[0-9]", image_name)
     # if found_http_port:
@@ -52,12 +56,18 @@ def explode_image(image: Image):
 
 def process_resource(db_ref: persistence.Persistence, kubernetes: Kubernetes, image: Image):
     """process_resource"""
-    docker_api_auth_mapper = {"dockerhub": get_dockerhub_auth, "harbor": get_harbor_auth, "aws_ecr": get_aws_auth}
+    docker_api_auth_mapper = {
+        "dockerhub": get_dockerhub_auth,
+        "harbor": get_harbor_auth,
+        "aws_ecr": get_aws_auth,
+        "digitalocean": get_digitalocean_auth,
+    }
 
     docker_api_host_mapper = {
         "dockerhub": get_dockerhub_host,
         "harbor": get_configured_host,
         "aws_ecr": get_configured_host,
+        "digitalocean": get_digitalocean_host,
     }
     container_registry_type = get_container_registry(image.image)
     if container_registry_type is None:
