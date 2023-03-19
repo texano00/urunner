@@ -50,12 +50,27 @@ def get_aws_auth(image: Image):
 
 def get_dockerhub_auth(image: Image):
     """get_dockerhub_auth"""
+    auth_service = "registry.docker.io"
+    auth_host = "auth.docker.io"
+    return get_docker_v2_api_auth_style(image=image, auth_host=auth_host, auth_service=auth_service)
+
+
+def get_digitalocean_auth(image: Image):
+    """get_digitalocean_auth"""
+    auth_service = "registry.digitalocean.com"
+    auth_host = "auth.docker.io"
+    # todo
+    auth_header = ""
+    return get_docker_v2_api_auth_style(image=image, auth_host=auth_host, auth_service=auth_service)
+
+
+def get_docker_v2_api_auth_style(image: Image, auth_service, auth_host):
+    """get_docker_v2_api_auth_style"""
     exploded_image = general.explode_image(image)
     image_name = exploded_image[0]
     dockerhub_image_path = get_dockerapi_image_path(image_name)
-    auth_service = "registry.docker.io"
     auth_scope = f"repository:{dockerhub_image_path}:pull"
-    url = f"https://auth.docker.io/token?service={auth_service}&scope={auth_scope}"
+    url = f"https://${auth_host}/token?service={auth_service}&scope={auth_scope}"
     response = requests.get(url, timeout=60)
     token = response.json()["token"]
     return f"Bearer {token}"
@@ -64,6 +79,11 @@ def get_dockerhub_auth(image: Image):
 def get_dockerhub_host():
     """get_dockerhub_host"""
     return "https://registry-1.docker.io"
+
+
+def get_digitalocean_host():
+    """get_digitalocean_host"""
+    return "registry.digitalocean.com"
 
 
 def get_configured_host():
