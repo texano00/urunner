@@ -17,7 +17,7 @@ Actually **Harbor**, **AWS ECR** and **Digital Ocean** are the container registr
 Use cases:
 
 - [AWS use case](https://www.yuribacciarini.com/automatically-pull-images-on-aws-ecr-latest-tag-change-from-aws-eks/)
-- [DigitalOcean container registry DOCR](https://www.yuribacciarini.com/automatically-pull-new-digitalocean-container-registry-docr-latest-tags-from-kubernetes/)
+- [DigitalOcean container registry DOCR use case](https://www.yuribacciarini.com/automatically-pull-new-digitalocean-container-registry-docr-latest-tags-from-kubernetes/)
 
 ## Configurable watcher
 
