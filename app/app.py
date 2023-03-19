@@ -11,7 +11,7 @@ from utils.model.image import Image
 
 def job():
     """Recurrent urunner Job"""
-    logging.info("%s start scheduler", general.get_date_time())
+    logging.debug("%s start scheduler", general.get_date_time())
     all_namespaces = kubernetes.get_namespaces()
     for namespace in all_namespaces.items:
         namespace = namespace.metadata.name

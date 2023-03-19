@@ -41,6 +41,8 @@ def explode_image(image: Image):
     # 435734619587.dkr.ecr.us-east-2.amazonaws.com/urunner-test/nginx:latest
     image_name = image.image
     image_name = image_name.replace(config.get_urunner_conf_container_registry_to_watch(), "")
+    if image_name[0] == "/":
+        image_name = image_name[1:]
 
     # found_http_port = re.search(".:[0-9]", image_name)
     # if found_http_port:
