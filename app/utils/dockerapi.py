@@ -75,11 +75,8 @@ def get_docker_v2_api_auth_style(image: Image, auth_service, auth_url, auth_head
     dockerhub_image_path = get_dockerapi_image_path(image_name)
     auth_scope = f"repository:{dockerhub_image_path}:pull"
     headers = {"Authorization": auth_header} if auth_header else {}
-    print(headers)
     url = f"{auth_url}?service={auth_service}&scope={auth_scope}"
-    print(url)
     response = requests.get(url, headers=headers, timeout=60)
-    print(response)
     token = response.json()["token"]
     return f"Bearer {token}"
 

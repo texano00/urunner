@@ -1,7 +1,7 @@
 image:
   repository: ghcr.io/texano00/urunner
   pullPolicy: IfNotPresent
-  tag: 0.1.5
+  tag: 0.2.1
 
 config:
   # se to false in order to disallow ssl verify to container registry
