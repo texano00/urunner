@@ -74,6 +74,7 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 | URUNNER_SECR_HARBOR_USER                 | Harbor username, configure only if registry type is harbor                                       | user                                   |
 | URUNNER_SECR_HARBOR_PASS                 | Harbor password, configure only if registry type is harbor                                       | pass                                   |
 | URUNNER_SECR_AWS_ACCESS_KEY_ID           | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | AKIAIOSFODNN7EXAMPLE                   |
+| URUNNER_SECR_AWS_REGION                  | AWS region                                                                                       | us-east-2                              |
 | URUNNER_SECR_AWS_SECRET_ACCESS_KEY       | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY |
 | URUNNER_SECR_DIGITAL_OCEAN_TOKEN         | Digital Ocean token                                                                              | xxxxx                                  |
 
