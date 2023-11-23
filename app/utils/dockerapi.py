@@ -38,7 +38,7 @@ def get_aws_auth(image: Image):
         region_name=region_name,
     )
 
-    client = boto3.client("ecr", region_name="us-east-2")
+    client = boto3.client("ecr", region_name=config.get_urunner_secr_aws_region)
 
     response = client.get_authorization_token(
         registryIds=[

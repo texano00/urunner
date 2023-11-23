@@ -47,6 +47,10 @@ def get_urunner_secr_harbor_pass():
     """get_urunner_secr_harbor_pass"""
     return os.environ.get("URUNNER_SECR_HARBOR_PASS", "Harbor12345")
 
+def get_urunner_secr_aws_region():
+    """def get_urunner_secr_aws_region"""
+    return os.environ.get("URUNNER_SECR_AWS_REGION", "us-east-2")
+
 
 def get_urunner_secr_aws_access_key_id():
     """def get_urunner_secr_aws_access_key_id"""
