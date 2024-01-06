@@ -4,6 +4,7 @@ metadata:
   name: cm-urunner
   labels:
     {{- include "urunner.labels" . | nindent 4 }}
+  namespace: {{ .Release.Namespace | quote }}
 data:
   URUNNER_CONF_DOCKER_API_VERIFY: {{ .Values.config.URUNNER_CONF_DOCKER_API_VERIFY | quote }}
   URUNNER_CONF_LOG_LEVEL: {{ .Values.config.URUNNER_CONF_LOG_LEVEL }}

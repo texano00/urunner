@@ -4,6 +4,7 @@ metadata:
   name: {{ include "urunner.fullname" . }}
   labels:
     {{- include "urunner.labels" . | nindent 4 }}
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   selector:
     matchLabels:
