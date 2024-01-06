@@ -10,3 +10,6 @@
 # NOT apply to ownership claim operations, which are processed immediately.
 #
 repositoryID: c7bd9b25-b6b6-408e-869c-24af9ea36c32
+owners: # (optional, used to claim repository ownership)
+  - name: Yuri Bacciarini
+    email: yuribacciarini@gmail.com
