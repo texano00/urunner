@@ -1,4 +1,7 @@
 # urunner
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/urunner)](https://artifacthub.io/packages/search?repo=urunner)
+![CI_CD_Helm](https://github.com/texano00/urunner/actions/workflows/CI_CD_Helm.yml/badge.svg)
+![CI_CD_App](https://github.com/texano00/urunner/actions/workflows/CI_CD_App.yml/badge.svg)
 
 ## Intro
 
@@ -51,10 +54,6 @@ metadata:
 Doing so, all deployments except `mydeployment` will be watched by Urunner.
 
 ## Helm
-
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/urunner)](https://artifacthub.io/packages/search?repo=urunner)
-
-[Artifact Hub Link](https://artifacthub.io/packages/helm/urunner/urunner)
 
 ```
 helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --version 0.1.0 --values my-values.yaml -n urunner --create-namespace
