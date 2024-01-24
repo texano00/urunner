@@ -67,6 +67,16 @@ def get_digitalocean_auth(image: Image):
         image=image, auth_url=auth_url, auth_service=auth_service, auth_header=auth_header
     )
 
+def get_gitlab_auth(image: Image):
+    """get_gitlab_auth"""
+    auth_service = "gitlab.com"
+    auth_url = "https://gitlab.com/jwt/auth"
+    do_token = config.get_urunner_secr_gitlab_token()
+    do_token = b64encode(f"{do_token}:{do_token}".encode("ascii")).decode("ascii")
+    auth_header = f"Basic {do_token}"
+    return get_docker_v2_api_auth_style(
+        image=image, auth_url=auth_url, auth_service=auth_service, auth_header=auth_header
+    )
 
 def get_docker_v2_api_auth_style(image: Image, auth_service, auth_url, auth_header=None):
     """get_docker_v2_api_auth_style"""

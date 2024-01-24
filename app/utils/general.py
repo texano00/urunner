@@ -7,6 +7,7 @@ from utils.dockerapi import (
     get_harbor_auth,
     get_aws_auth,
     get_digitalocean_auth,
+    get_gitlab_auth,
     get_dockerhub_host,
     get_configured_host,
     get_digitalocean_host,
@@ -61,6 +62,7 @@ def process_resource(db_ref: persistence.Persistence, kubernetes: Kubernetes, im
         "harbor": get_harbor_auth,
         "aws_ecr": get_aws_auth,
         "digitalocean": get_digitalocean_auth,
+        "gitlab" : get_gitlab_auth
     }
 
     docker_api_host_mapper = {
@@ -68,6 +70,7 @@ def process_resource(db_ref: persistence.Persistence, kubernetes: Kubernetes, im
         "harbor": get_configured_host,
         "aws_ecr": get_configured_host,
         "digitalocean": get_digitalocean_host,
+        "gitlab": get_configured_host
     }
     container_registry_type = get_container_registry(image.image)
     if container_registry_type is None:
