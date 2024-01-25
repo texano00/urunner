@@ -15,10 +15,11 @@ config:
   URUNNER_CONF_FREQUENCY_CHECK_SECONDS: 20
   # container registry url
   URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH: 435734619587.dkr.ecr.us-east-2.amazonaws.com
-  # harbor, aws_ecr, digitalocean
+  # harbor, aws_ecr, digitalocean, gitalab
   URUNNER_CONF_CONTAINER_REGISTRY_TYPE: aws_ecr
 secret:
   create: true
+  # for expected keys see secret.yaml
   secretName: ""
   harbor:
     username: 
@@ -27,6 +28,8 @@ secret:
     access_key_id:
     secret_access_key:
   digitalocean:
+    token:
+  gitlab:
     token:
 
 imagePullSecrets: []
