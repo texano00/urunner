@@ -167,4 +167,4 @@ Session.vim
 **/charts/*.tgz
 
 .history
-helm/urunner/test-values.yaml
+helm/urunner/test-values-*.yaml

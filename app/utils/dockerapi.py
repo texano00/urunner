@@ -69,7 +69,7 @@ def get_digitalocean_auth(image: Image):
 
 def get_gitlab_auth(image: Image):
     """get_gitlab_auth"""
-    auth_service = "gitlab.com"
+    auth_service = "container_registry"
     auth_url = "https://gitlab.com/jwt/auth"
     do_token = config.get_urunner_secr_gitlab_token()
     do_token = b64encode(f"{do_token}:{do_token}".encode("ascii")).decode("ascii")
@@ -86,7 +86,9 @@ def get_docker_v2_api_auth_style(image: Image, auth_service, auth_url, auth_head
     auth_scope = f"repository:{dockerhub_image_path}:pull"
     headers = {"Authorization": auth_header} if auth_header else {}
     url = f"{auth_url}?service={auth_service}&scope={auth_scope}"
+    logging.debug(url)
     response = requests.get(url, headers=headers, timeout=60)
+    logging.debug(response)
     token = response.json()["token"]
     return f"Bearer {token}"
 
