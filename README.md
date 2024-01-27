@@ -17,11 +17,11 @@ Urunner integrates external container registry (ex. [Harbor](https://goharbor.io
 Actually **Harbor**, **AWS ECR**, **Digital Ocean** and **GitLab** are the container registries officially supported.\
 **Azure ACR** and **Dockerhub** support will be released soon.
 
-Use cases:
+URunner use cases with specific how-to:
 
 - [AWS use case](https://www.yuribacciarini.com/automatically-pull-images-on-aws-ecr-latest-tag-change-from-aws-eks/)
 - [DigitalOcean container registry DOCR use case](https://www.yuribacciarini.com/automatically-pull-new-digitalocean-container-registry-docr-latest-tags-from-kubernetes/)
-
+- [GitLab container registry use case](https://www.yuribacciarini.com/k8s-automatically-pull-images-from-gitlab-container-registry-without-change-the-tag/)
 ## Configurable watcher
 
 Urunner is also **fully configurable** in order to **watch only specific namespaces** with specific label to manage exception.\
