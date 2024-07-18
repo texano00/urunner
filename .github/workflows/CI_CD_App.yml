@@ -86,6 +86,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v6
         with:
+          context: app
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6,linux/arm/v7
           push: true
