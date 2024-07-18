@@ -11,10 +11,10 @@ name: "[CI/CD] App"
 
 on:
   push:
-    branches: ['main','14-add-support-for-arm64']
+    branches: ['main']
     paths:
     - 'app/**'
-    - '.github/**'
+#    - '.github/**'
 
 env:
   REGISTRY: ghcr.io
