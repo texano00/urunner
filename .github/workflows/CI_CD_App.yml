@@ -67,8 +67,7 @@ jobs:
             exit 1
           else
             echo "does not exist -> push"
-            docker build . -t ${built_image}
-            docker push ${built_image}  
+            docker buildx build --platform linux/amd64,linux/arm64/v8,linux/arm/v6,linux/arm/v7 -t ${built_image} --push .
           fi
 
           
