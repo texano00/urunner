@@ -11,7 +11,7 @@ name: "[CI/CD] App"
 
 on:
   push:
-    branches: ['main']
+    branches: ['main','14-add-support-for-arm64']
     paths:
     - 'app/**'
 
