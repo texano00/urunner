@@ -14,6 +14,7 @@ on:
     branches: ['main']
     paths:
     - 'app/**'
+#    - '.github/**'
 
 env:
   REGISTRY: ghcr.io
@@ -55,20 +56,39 @@ jobs:
         run: |
             version=$(cat .version)
             echo "version=${version}" >> $GITHUB_OUTPUT
-              
-      - name: docker build and push
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to container registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_PASSWORD }}
+          registry: ${{ env.REGISTRY }}
+
+
+      - name: Check if version already exist
         id: build_and_push
         run: |
           built_image="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}"
 
-          docker login ${{ env.REGISTRY }} -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_PASSWORD }}
           if docker manifest inspect ${built_image} > /dev/null; then
             echo "already exist -> do not push"
             exit 1
           else
-            echo "does not exist -> push"
-            docker build . -t ${built_image}
-            docker push ${built_image}  
+            echo "does not exist -> going on"
           fi
 
+      - name: Build and Push Image
+        uses: docker/build-push-action@v6
+        with:
+          context: app
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v6,linux/arm/v7
+          push: true
+          
           
