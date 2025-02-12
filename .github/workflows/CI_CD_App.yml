@@ -12,6 +12,7 @@ name: "[CI/CD] App"
 on:
   push:
     branches: ['main']
+    tags: ["*"]
     paths:
     - 'app/**'
 #    - '.github/**'
@@ -69,19 +70,6 @@ jobs:
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_PASSWORD }}
           registry: ${{ env.REGISTRY }}
-
-
-      - name: Check if version already exist
-        id: build_and_push
-        run: |
-          built_image="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}"
-
-          if docker manifest inspect ${built_image} > /dev/null; then
-            echo "already exist -> do not push"
-            exit 1
-          else
-            echo "does not exist -> going on"
-          fi
 
       - name: Build and Push Image
         uses: docker/build-push-action@v6
