@@ -17,7 +17,7 @@ on:
     - 'helm/**'
 env:
   REGISTRY: ghcr.io
-  OCI_CHART_NAME: texano00/urunner/helm
+  OCI_CHART_NAME: avznog/urunner/helm
 
 jobs:
   build-and-push-image:
