@@ -9,12 +9,12 @@
 
 name: "[CI/CD] Helm"
 
-on:
+on: 
+  workflow_dispatch:
   push:
     branches: ['main']
     paths:
     - 'helm/**'
-  workflow_dispatch
 env:
   REGISTRY: ghcr.io
   OCI_CHART_NAME: texano00/urunner/helm
