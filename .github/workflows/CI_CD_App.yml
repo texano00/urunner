@@ -12,14 +12,13 @@ name: "[CI/CD] App"
 on:
   push:
     branches: ['main']
-    tags: ["*"]
     paths:
     - 'app/**'
-    - '.github/**'
+#    - '.github/**'
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: avznog/urunner
+  IMAGE_NAME: texano00/urunner
 
 jobs:
   build-and-push-image:
@@ -37,18 +36,32 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          images: |
-              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          flavor: |
-            latest=false
-          tags: |
-            type=semver,pattern={{raw}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint
+        run: |
+          pylint $(git ls-files '*.py') --fail-under=10
+
+      - name: Get version
+        id: metadata
+        run: |
+            version=$(cat .version)
+            echo "version=${version}" >> $GITHUB_OUTPUT
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to container registry
         uses: docker/login-action@v3
@@ -57,11 +70,25 @@ jobs:
           password: ${{ secrets.GHCR_PASSWORD }}
           registry: ${{ env.REGISTRY }}
 
+
+      - name: Check if version already exist
+        id: build_and_push
+        run: |
+          built_image="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}"
+
+          if docker manifest inspect ${built_image} > /dev/null; then
+            echo "already exist -> do not push"
+            exit 1
+          else
+            echo "does not exist -> going on"
+          fi
+
       - name: Build and Push Image
         uses: docker/build-push-action@v6
         with:
           context: app
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}
+          platforms: linux/amd64,linux/arm64/v8,linux/arm/v6,linux/arm/v7
           push: true
           
           

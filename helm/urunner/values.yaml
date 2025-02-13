@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/avznog/urunner
+  repository: ghcr.io/texano00/urunner
   pullPolicy: IfNotPresent
 
 config:

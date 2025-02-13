@@ -72,4 +72,4 @@ def get_urunner_secr_gitlab_token():
 
 def get_urunner_secr_gitlab_url():
     """def get_urunner_secr_gitlab_url"""
-    return os.environ.get("URUNNER_SECR_GITLAB_URL", "xxxxx")
+    return os.environ.get("URUNNER_SECR_GITLAB_URL", "https://gitlab.com")
