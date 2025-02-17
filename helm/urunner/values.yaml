@@ -3,6 +3,7 @@ image:
   pullPolicy: IfNotPresent
 
 config:
+  configMapName: "cm-urunner"
   # se to false in order to disallow ssl verify to container registry
   URUNNER_CONF_DOCKER_API_VERIFY: true
   # Text logging level for the message ('DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL').
@@ -20,7 +21,7 @@ config:
 secret:
   create: true
   # for expected keys see secret.yaml
-  secretName: ""
+  secretName: "secret-urunner"
   harbor:
     username: 
     password:
