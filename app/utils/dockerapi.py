@@ -70,7 +70,7 @@ def get_digitalocean_auth(image: Image):
 def get_gitlab_auth(image: Image):
     """get_gitlab_auth"""
     auth_service = "container_registry"
-    auth_url = "https://gitlab.com/jwt/auth"
+    auth_url = f"{config.get_urunner_secr_gitlab_auth_url()}/jwt/auth"
     do_token = config.get_urunner_secr_gitlab_token()
     do_token = b64encode(f"{do_token}:{do_token}".encode("ascii")).decode("ascii")
     auth_header = f"Basic {do_token}"

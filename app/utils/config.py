@@ -69,3 +69,7 @@ def get_urunner_secr_digital_ocean_token():
 def get_urunner_secr_gitlab_token():
     """def get_urunner_secr_gitlab_token"""
     return os.environ.get("URUNNER_SECR_GITLAB_TOKEN", "xxxxx")
+
+def get_urunner_secr_gitlab_auth_url():
+    """def get_urunner_secr_gitlab_auth_url"""
+    return os.environ.get("URUNNER_SECR_GITLAB_AUTH_URL", "https://gitlab.com")
