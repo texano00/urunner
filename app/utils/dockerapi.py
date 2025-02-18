@@ -112,12 +112,17 @@ def get_configured_host():
 def get_dockerapi_digest(image: Image, authorization, host, container_registry_type):
     """get_dockerapi_digest"""
     exploded_image = general.explode_image(image)
-    logging.debug(f"exploded_image: {exploded_image}")
+    logging.debug("exploded_image: %s", exploded_image)
     image_name = exploded_image[0]
     image_tag = exploded_image[1]
 
-    dockerhub_image_path = get_dockerapi_image_path(image_name) if container_registry_type == "dockerhub" else image_name
-    logging.debug(f"dockerhub_image_path: {dockerhub_image_path}")
+    dockerhub_image_path = (
+        get_dockerapi_image_path(image_name)
+        if container_registry_type == "dockerhub"
+        else image_name
+    )
+
+    logging.debug("dockerhub_image_path: %s", dockerhub_image_path)
 
     headers = {"Authorization": authorization}
     url = f"{host}/v2/{dockerhub_image_path}/manifests/{image_tag}"
