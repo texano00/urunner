@@ -77,7 +77,7 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 | URUNNER_SECR_AWS_SECRET_ACCESS_KEY       | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY |
 | URUNNER_SECR_DIGITAL_OCEAN_TOKEN         | Digital Ocean token                                                                              | xxxxx                                  |
 | URUNNER_SECR_GITLAB_TOKEN         | Gitlab token                                                                              | xxxxx                                  |
-| URUNNER_SECR_GITLAB_URL         | Gitlab URL                                                                              | xxxxx                                  |
+| URUNNER_SECR_GITLAB_AUTH_URL | Gitlab URL where `/jwt/auth` API is exposed. This is usually the same URL where GitLab instance itself is exposed.                                                                              | my-gitlab.com |
 
 ## Flow
 
