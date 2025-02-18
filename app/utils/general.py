@@ -1,6 +1,7 @@
 """"General module"""
 import datetime
 import logging
+import re
 from utils.dockerapi import (
     get_dockerapi_digest,
     get_dockerhub_auth,
@@ -35,6 +36,7 @@ def get_container_registry(image):
 
 def explode_image(image: Image):
     """explode_image"""
+    # Example image formats:
     # harbor:8080/image:latest
     # harbor:8080/image
     # nginx:latest
@@ -42,15 +44,15 @@ def explode_image(image: Image):
     # 435734619587.dkr.ecr.us-east-2.amazonaws.com/urunner-test/nginx:latest
     image_name = image.image
     image_name = image_name.replace(config.get_urunner_conf_container_registry_to_watch(), "")
-    if image_name[0] == "/":
+    if image_name.startswith("/"):
         image_name = image_name[1:]
 
-    # found_http_port = re.search(".:[0-9]", image_name)
-    # if found_http_port:
-    #     image_name = image_name.split("/", 1)[1]
-
-    if ":" in image_name:
-        return (image_name.split(":")[0], image_name.split(":")[1])
+    # Regular expression to match image name and tag
+    match = re.match(r'^(.*?)(?::([^:/]+))?$', image_name)
+    if match:
+        image_name = match.group(1)
+        tag = match.group(2) if match.group(2) else "latest"
+        return (image_name, tag)
 
     return (image_name, "latest")
 
