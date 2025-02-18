@@ -1,4 +1,4 @@
-"""Entrypoint module"""
+"""Entrypoint module."""
 import logging
 import time
 import schedule
