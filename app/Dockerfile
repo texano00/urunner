@@ -16,6 +16,8 @@ RUN echo "**** install Python ****" && \
 
 ENV BASE_DIR=/app
 WORKDIR ${BASE_DIR}
-ADD . $BASE_DIR
+ADD requirements.txt $BASE_DIR
 RUN pip3 install -r requirements.txt
+
+ADD . $BASE_DIR
 CMD python -u app.py
