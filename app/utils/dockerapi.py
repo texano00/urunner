@@ -32,13 +32,13 @@ def get_aws_auth(image: Image):
     # ex. 435734619587.dkr.ecr.us-east-2.amazonaws.com
     region_name = config.get_urunner_conf_container_registry_to_watch().split(".")[3]
     registry_id = config.get_urunner_conf_container_registry_to_watch().split(".")[0]
-    boto3.Session(
-        aws_access_key_id=config.get_urunner_secr_aws_access_key_id,
-        aws_secret_access_key=config.get_urunner_secr_aws_secret_access_key,
+    session = boto3.Session(
+        aws_access_key_id=config.get_urunner_secr_aws_access_key_id(),
+        aws_secret_access_key=config.get_urunner_secr_aws_secret_access_key(),
         region_name=region_name,
     )
 
-    client = boto3.client("ecr", region_name=region_name)
+    client = session.client("ecr", region_name=region_name)
 
     response = client.get_authorization_token(
         registryIds=[
@@ -109,15 +109,15 @@ def get_configured_host():
     return f"https://{registry_host}"
 
 
-def get_dockerapi_digest(image: Image, authorization, host):
+def get_dockerapi_digest(image: Image, authorization, host, container_registry_type):
     """get_dockerapi_digest"""
     exploded_image = general.explode_image(image)
-    logging.debug(exploded_image)
+    logging.debug(f"exploded_image: {exploded_image}")
     image_name = exploded_image[0]
     image_tag = exploded_image[1]
 
-    dockerhub_image_path = get_dockerapi_image_path(image_name)
-    logging.debug(dockerhub_image_path)
+    dockerhub_image_path = get_dockerapi_image_path(image_name) if container_registry_type == "dockerhub" else image_name
+    logging.debug(f"dockerhub_image_path: {dockerhub_image_path}")
 
     headers = {"Authorization": authorization}
     url = f"{host}/v2/{dockerhub_image_path}/manifests/{image_tag}"

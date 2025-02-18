@@ -81,7 +81,7 @@ def process_resource(db_ref: persistence.Persistence, kubernetes: Kubernetes, im
 
     auth = docker_api_auth_mapper[container_registry_type](image)
     docker_api_host = docker_api_host_mapper[container_registry_type]()
-    tag_digest = get_dockerapi_digest(image, auth, docker_api_host)
+    tag_digest = get_dockerapi_digest(image, auth, docker_api_host, container_registry_type)
     if tag_digest is None:
         return
 
