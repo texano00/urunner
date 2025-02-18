@@ -32,7 +32,7 @@ secret:
     token:
   gitlab:
     token:
-    url:
+    auth_url:
 
 imagePullSecrets: []
 nameOverride: ""
