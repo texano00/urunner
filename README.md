@@ -3,6 +3,10 @@
 ![CI_CD_Helm](https://github.com/texano00/urunner/actions/workflows/CI_CD_Helm.yml/badge.svg)
 ![CI_CD_App](https://github.com/texano00/urunner/actions/workflows/CI_CD_App.yml/badge.svg)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=texano00/urunner&type=Date)](https://star-history.com/#texano00/urunner&Date)
+
 ## Intro
 
 <img width=200 src=asset/logo.png>
