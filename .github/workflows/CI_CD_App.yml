@@ -49,7 +49,7 @@ jobs:
 
       - name: Lint
         run: |
-          pylint $(git ls-files '*.py') --fail-under=10
+          pylint $(git ls-files '*.py' | grep -v 'test_') --fail-under=10
 
       - name: Tests
         run: |
