@@ -1,9 +1,9 @@
 import unittest
 from utils.model.image import Image
-from utils.general import explode_image
+from utils.helpers import explode_image
 
 
-class TestGeneral(unittest.TestCase):
+class TestHelpers(unittest.TestCase):
 
     def test_explode_image_with_tag(self):
         image = Image(
