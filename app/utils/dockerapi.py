@@ -124,7 +124,13 @@ def get_dockerapi_digest(image: Image, authorization, host, container_registry_t
 
     logging.debug("dockerhub_image_path: %s", dockerhub_image_path)
 
-    headers = {"Authorization": authorization}
+    accept_header = config.get_urunner_conf_docker_api_accept_header()
+
+    headers = {
+        "Authorization": authorization,
+        "Accept": accept_header,
+    }
+    logging.debug(headers)
     url = f"{host}/v2/{dockerhub_image_path}/manifests/{image_tag}"
     try:
         response = requests.get(url, headers=headers, verify=config.get_urunner_conf_docker_api_verify(), timeout=60)

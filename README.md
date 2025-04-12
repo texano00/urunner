@@ -65,23 +65,24 @@ helm upgrade --install urunner oci://ghcr.io/texano00/urunner/helm/urunner --ver
 
 ## Urunner env vars
 
-| Var                                      | Description                                                                                      | Example                                |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| URUNNER_CONF_DOCKER_API_VERIFY           | SSL verify to docker registry                                                                    | True or False                          |
-| URUNNER_CONF_LOG_LEVEL                   | Log Level                                                                                        | DEBUG,INFO,WARNING                     |
-| URUNNER_CONF_KUBE_AUTH                   | Kubernetes client authentication strategy                                                        | incluster or kubeconfig                |
-| URUNNER_CONF_SQLLIGHT_PATH               | Path of sqlight DB                                                                               | ./urunner.db                           |
-| URUNNER_CONF_FREQUENCY_CHECK_SECONDS     | Frequency of urunner cron job (seconds)                                                          | 30                                     |
-| URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH | Which is the container registry to watch                                                         | registry.mycompanyhost.net:8080        |
-| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                                                       | harbor,aws_ecr, digitalocean, gitlab           |
-| URUNNER_SECR_HARBOR_USER                 | Harbor username, configure only if registry type is harbor                                       | user                                   |
-| URUNNER_SECR_HARBOR_PASS                 | Harbor password, configure only if registry type is harbor                                       | pass                                   |
-| URUNNER_SECR_AWS_ACCESS_KEY_ID           | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | AKIAIOSFODNN7EXAMPLE                   |
-| URUNNER_SECR_AWS_REGION                  | AWS region                                                                                       | us-east-2                              |
-| URUNNER_SECR_AWS_SECRET_ACCESS_KEY       | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr | wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY |
-| URUNNER_SECR_DIGITAL_OCEAN_TOKEN         | Digital Ocean token                                                                              | xxxxx                                  |
-| URUNNER_SECR_GITLAB_TOKEN         | Gitlab token                                                                              | xxxxx                                  |
-| URUNNER_SECR_GITLAB_AUTH_URL | Gitlab URL where `/jwt/auth` API is exposed. This is usually the same URL where GitLab instance itself is exposed.                                                                              | my-gitlab.com |
+| Var                                      | Description                                                                                                        | Example                                                                                          |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| DOCKER_API_ACCEPT_HEADER                 | Accept header to inject on Docker API v2 registry                                                                  | application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json |
+| URUNNER_CONF_DOCKER_API_VERIFY           | SSL verify to docker registry                                                                                      | True or False                                                                                    |
+| URUNNER_CONF_LOG_LEVEL                   | Log Level                                                                                                          | DEBUG,INFO,WARNING                                                                               |
+| URUNNER_CONF_KUBE_AUTH                   | Kubernetes client authentication strategy                                                                          | incluster or kubeconfig                                                                          |
+| URUNNER_CONF_SQLLIGHT_PATH               | Path of sqlight DB                                                                                                 | ./urunner.db                                                                                     |
+| URUNNER_CONF_FREQUENCY_CHECK_SECONDS     | Frequency of urunner cron job (seconds)                                                                            | 30                                                                                               |
+| URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH | Which is the container registry to watch                                                                           | registry.mycompanyhost.net:8080                                                                  |
+| URUNNER_CONF_CONTAINER_REGISTRY_TYPE     | Kind of container registry                                                                                         | harbor,aws_ecr, digitalocean, gitlab                                                             |
+| URUNNER_SECR_HARBOR_USER                 | Harbor username, configure only if registry type is harbor                                                         | user                                                                                             |
+| URUNNER_SECR_HARBOR_PASS                 | Harbor password, configure only if registry type is harbor                                                         | pass                                                                                             |
+| URUNNER_SECR_AWS_ACCESS_KEY_ID           | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr                   | AKIAIOSFODNN7EXAMPLE                                                                             |
+| URUNNER_SECR_AWS_REGION                  | AWS region                                                                                                         | us-east-2                                                                                        |
+| URUNNER_SECR_AWS_SECRET_ACCESS_KEY       | AWS credential in order to pull from AWS private ECR, configure only if registry type is aws_ecr                   | wJalrXUtnFEMI/K7MDENG/xRfiCYEXAMPLEKEY                                                           |
+| URUNNER_SECR_DIGITAL_OCEAN_TOKEN         | Digital Ocean token                                                                                                | xxxxx                                                                                            |
+| URUNNER_SECR_GITLAB_TOKEN                | Gitlab token                                                                                                       | xxxxx                                                                                            |
+| URUNNER_SECR_GITLAB_AUTH_URL             | Gitlab URL where `/jwt/auth` API is exposed. This is usually the same URL where GitLab instance itself is exposed. | my-gitlab.com                                                                                    |
 
 ## Flow
 
