@@ -18,6 +18,8 @@ config:
   URUNNER_CONF_CONTAINER_REGISTRY_TO_WATCH: 435734619587.dkr.ecr.us-east-2.amazonaws.com
   # harbor, aws_ecr, digitalocean, gitlab
   URUNNER_CONF_CONTAINER_REGISTRY_TYPE: aws_ecr
+  # docker api accept header
+  DOCKER_API_ACCEPT_HEADER: 'application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json'
 secret:
   create: true
   # for expected keys see secret.yaml

@@ -4,7 +4,7 @@ import logging
 import hashlib
 import requests
 import boto3
-import utils.general as general
+from utils.helpers import explode_image  # Import from helpers
 import utils.config as config
 from utils.model.image import Image
 
@@ -80,7 +80,7 @@ def get_gitlab_auth(image: Image):
 
 def get_docker_v2_api_auth_style(image: Image, auth_service, auth_url, auth_header=None):
     """get_docker_v2_api_auth_style"""
-    exploded_image = general.explode_image(image)
+    exploded_image = explode_image(image)
     image_name = exploded_image[0]
     dockerhub_image_path = get_dockerapi_image_path(image_name)
     auth_scope = f"repository:{dockerhub_image_path}:pull"
@@ -111,7 +111,7 @@ def get_configured_host():
 
 def get_dockerapi_digest(image: Image, authorization, host, container_registry_type):
     """get_dockerapi_digest"""
-    exploded_image = general.explode_image(image)
+    exploded_image = explode_image(image)
     logging.debug("exploded_image: %s", exploded_image)
     image_name = exploded_image[0]
     image_tag = exploded_image[1]
@@ -124,7 +124,13 @@ def get_dockerapi_digest(image: Image, authorization, host, container_registry_t
 
     logging.debug("dockerhub_image_path: %s", dockerhub_image_path)
 
-    headers = {"Authorization": authorization}
+    accept_header = config.get_urunner_conf_docker_api_accept_header()
+
+    headers = {
+        "Authorization": authorization,
+        "Accept": accept_header,
+    }
+    logging.debug(headers)
     url = f"{host}/v2/{dockerhub_image_path}/manifests/{image_tag}"
     try:
         response = requests.get(url, headers=headers, verify=config.get_urunner_conf_docker_api_verify(), timeout=60)

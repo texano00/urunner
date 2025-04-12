@@ -2,6 +2,7 @@
 import logging
 import time
 import schedule
+from app.utils.helpers import explode_image
 import utils.persistence as persistence
 import utils.kubernetes as k8s
 import utils.config as config
@@ -30,7 +31,7 @@ def job():
                     image=container.image,
                 )
 
-                image_tag = general.explode_image(image)[1]
+                image_tag = explode_image(image)[1]
                 image.tag = image_tag
                 image_id = f"{namespace}-{deployment.metadata.name}-{container.image}-{image_tag}"
                 image.image_id = image_id

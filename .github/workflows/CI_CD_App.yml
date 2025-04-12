@@ -14,7 +14,9 @@ on:
     branches: ['main']
     paths:
     - 'app/**'
-#    - '.github/**'
+  pull_request:
+    paths:
+    - 'app/**'
 
 env:
   REGISTRY: ghcr.io
@@ -74,8 +76,7 @@ jobs:
           password: ${{ secrets.GHCR_PASSWORD }}
           registry: ${{ env.REGISTRY }}
 
-
-      - name: Check if version already exist
+      - name: Check if version already exists
         id: build_and_push
         run: |
           built_image="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}"
@@ -88,11 +89,11 @@ jobs:
           fi
 
       - name: Build and Push Image
+        if: ${{ github.event_name != 'pull_request' }}
         uses: docker/build-push-action@v6
         with:
           context: app
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.metadata.outputs.version }}
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v6,linux/arm/v7
           push: true
-          
-          
+
