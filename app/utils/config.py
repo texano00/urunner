@@ -76,4 +76,5 @@ def get_urunner_secr_gitlab_auth_url():
 
 def get_urunner_conf_docker_api_accept_header():
     """Get the custom Accept header for Docker API"""
-    return os.environ.get("DOCKER_API_ACCEPT_HEADER", "application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json")
+    # pylint: disable=line-too-long
+    return os.environ.get("DOCKER_API_ACCEPT_HEADER","application/vnd.docker.distribution.manifest.v2+json, application/vnd.oci.image.manifest.v1+json")
